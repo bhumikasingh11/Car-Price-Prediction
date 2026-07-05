@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Car Price Prediction</title>
+   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>🚗 Car Price Prediction</h1>
+        <form action="/predict" method="POST">
+
+            <label for="present_price">Present Price (in Lakhs)</label>
+            <input type="number" step="0.01" id="present_price" name="present_price" required>
+
+            <label for="kms_driven">Kms Driven</label>
+            <input type="number" id="kms_driven" name="kms_driven" required>
+
+            <label>Fuel Type</label>
+            <div class="radio-group">
+                <span><input type="radio" name="fuel_type" value="Petrol" checked> Petrol</span>
+                <span><input type="radio" name="fuel_type" value="Diesel"> Diesel</span>
+                <span><input type="radio" name="fuel_type" value="CNG"> CNG</span>
+            </div>
+
+            <label>Seller Type</label>
+            <div class="radio-group">
+                <span><input type="radio" name="seller_type" value="Dealer" checked> Dealer</span>
+                <span><input type="radio" name="seller_type" value="Individual"> Individual</span>
+            </div>
+
+            <label>Transmission</label>
+            <div class="radio-group">
+                <span><input type="radio" name="transmission" value="Manual" checked> Manual</span>
+                <span><input type="radio" name="transmission" value="Automatic"> Automatic</span>
+            </div>
+            
+            <label for="owner">Owner</label>
+            <select id="owner" name="owner">
+                <option value="0">0 (First owner)</option>
+                <option value="1">1 (Second owner)</option>
+                <option value="3">3 (Third owner)</option>
+            </select>
+
+            <label for="years_used">Years Used</label>
+            <input type="number" id="years_used" name="years_used" required>
+
+            <button type="submit">Predict</button>
+        </form>
+
+        {% if prediction_text %}
+            <div class="result">
+                {{ prediction_text }}
+            </div>
+        {% endif %}
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
